@@ -149,20 +149,21 @@ void add(BTA *root) {
   printf("enter the domain: ");
   scanf("%[^\n]", name); scanf("%*c");
 
-  printf("enter the ip: ");
-  scanf("%[^\n]", number); scanf("%*c");
-  
   btpos(root,ZSTART);
   while(bnxtky(root,number1,&i) == 0) {
     
     btsel(root, number1, name1, 30, &rsize);
     if(!strcmp(name,name1) || !strcmp(number,number1)) {
-      printf("exist domain or ip!\n");
+      printf("\n\nfail! exist domain!\n\n");
       s = 1;
+      return;
     }
   }
+
+  printf("enter the ip: ");
+  scanf("%[^\n]", number); scanf("%*c");
   
-  if(s == 0) s = btins(root, number, name, 30* sizeof(char));
+  s = btins(root, number, name, 30* sizeof(char));
   
   if(!s) {
 
@@ -170,6 +171,6 @@ void add(BTA *root) {
     printf("add successfull!\n\n");
   } else {
 
-    printf("add fail!\n\n");
+    printf("\n\nfail! exist ip!\n\n");
   }
 }
