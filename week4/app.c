@@ -6,6 +6,7 @@ int main()
 
     readFile(abc);
 
-    print(abc);
+    /* print(abc); */
+    add(abc);
     btcls(abc);
 }

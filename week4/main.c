@@ -1,30 +1,40 @@
 #include "main.h"
 
 void readFile(BTA *root) {
-    FILE *f = fopen("phonebook.txt", "r");
+    FILE *f = fopen("dns.txt", "r");
     if(f == NULL) return;
 
     char name[30], number[20];
+    int n;
 
-    while(!feof(f)) {
-        fscanf(f,"%[^:]", name); fscanf(f,"%*c");
-        fscanf(f,"%[^\n]", number); fscanf(f,"%*c");
-        
-        printf("%s-%s-%d\n",name, number, btins(root, number, name, 30* sizeof(char)));
+    fscanf(f,"%d",&n);fscanf(f,"%*c");
+
+    for(int i = 0; i< n; i++) {
+
+      fscanf(f,"%[^\n]", name); fscanf(f,"%*c");
+      fscanf(f,"%[^\n]", number); fscanf(f,"%*c");
+
+      printf("%s-%s-%d\n",name, number, btins(root, number, name, 30* sizeof(char)));
     }
+    /* while(!feof(f)) { */
+    /*     fscanf(f,"%[^:]", name); fscanf(f,"%*c"); */
+    /*     fscanf(f,"%[^\n]", number); fscanf(f,"%*c"); */
+        
+    /*     printf("%s-%s-%d\n",name, number, btins(root, number, name, 30* sizeof(char))); */
+    /* } */
 
     fclose(f);
 }
 
 void writeFile(char *name, char* number) {
-    FILE *f = fopen("phonebook.txt","a");
+    FILE *f = fopen("dns.txt","a");
 
     if(f == 0) {
         printf("cannot read file!\n");
         return;
     };
 
-    fprintf(f,"\n%s:%s",name,number);
+    fprintf(f,"%s:%s",name,number);
 
     fclose(f);
 }
@@ -119,6 +129,21 @@ void print(BTA *root)
     btpos(root, ZSTART);
     while(bnxtky(root, number, &i) == 0) {
         btsel(root, number, name, 30, &rsize);
-        printf("%-30s%-15s%-15d\n", name, number, rsize);
+        printf("%-30s%-15s\n", name, number);
     }
+}
+
+void add(BTA *root) {
+
+  char name[30], number[20];
+
+  printf("enter the name: ");
+  scanf("%[^\n]", name); scanf("%*c");
+
+  printf("enter the domain: ");
+  scanf("%[^\n]", number); scanf("%*c");
+
+  printf("%s-%s-%d\n",name, number, btins(root, number, name, 30* sizeof(char)));
+  writeFile(name, number);
+  printf("add successfull!\n");
 }

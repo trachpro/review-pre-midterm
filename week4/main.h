@@ -12,3 +12,4 @@ void searchByNumber(BTA *root);
 void editPhoneByNumber(BTA *root);
 void del(BTA *root);
 void print(BTA *root);
+void add(BTA *root);
