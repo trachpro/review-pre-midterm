@@ -14,7 +14,7 @@ void readFile(BTA *root) {
       fscanf(f,"%[^\n]", name); fscanf(f,"%*c");
       fscanf(f,"%[^\n]", number); fscanf(f,"%*c");
 
-      printf("%s-%s-%d\n",name, number, btins(root, number, name, 30* sizeof(char)));
+      btins(root, number, name, 30* sizeof(char));
     }
     /* while(!feof(f)) { */
     /*     fscanf(f,"%[^:]", name); fscanf(f,"%*c"); */
@@ -34,7 +34,7 @@ void writeFile(char *name, char* number) {
         return;
     };
 
-    fprintf(f,"%s:%s",name,number);
+    fprintf(f,"%s\n%s\n",name,number);
 
     fclose(f);
 }
@@ -59,11 +59,12 @@ void searchByName(BTA *root) {
     char name[30],name1[30];
     char number[15];
     int i, rsize, flag = 0;
-    printf("enter the name: ");
+    printf("\n\n--------search by domain-----\n");
+    printf("enter the domain: ");
     scanf("%[^\n]",name1); scanf("%*c");
     
     btpos(root,ZSTART);
-    
+    printf("\n result: \n");
     while(bnxtky(root,number,&i) == 0) {
         btsel(root, number, name, 30, &rsize);
         if(!strcmp(name,name1)) {
@@ -78,15 +79,15 @@ void searchByName(BTA *root) {
 void searchByNumber(BTA *root) {
     char name[30], number[15];
     int rsize;
-    
-    printf("enter the number: ");
+    printf("\n\n--------search by ip-----\n");
+    printf("enter the ip: ");
     scanf("%[^\n]",number); scanf("%*c");
-
+    printf("\n result: \n");
     if(btsel(root, number,name,30, &rsize) == 0) {
         // printf("rsiez = %d",rsize);
         printf("%-30s%-15s\n", name, number);
     } else {
-        printf("no name match!\n");
+        printf("\nno name match!\n");
     }
 }
 
@@ -94,7 +95,7 @@ void editPhoneByNumber(BTA *root) {
     char name[30], number[20];
     int rsize;
 
-    printf("enter the number: ");
+    printf("enter the ip: ");
     scanf("%[^\n]",number); scanf("%*c");
 
     if(btsel(root, number,name,30, &rsize) == 0) {
@@ -103,13 +104,12 @@ void editPhoneByNumber(BTA *root) {
         scanf("%[^\n]",name); scanf("%*c");
         btupd(root,number,name,30);
     } else {
-        printf("no name match!\n");
+        printf("\nno name match!\n");
     }
 }
 
 void del(BTA *root) {
     char number[20];
-
     printf("enter the number: ");
     scanf("%[^\n]",number); scanf("%*c");
 
@@ -127,6 +127,8 @@ void print(BTA *root)
     char name[30];
     int rsize;
     btpos(root, ZSTART);
+
+    printf("\n---------the list---------\n");
     while(bnxtky(root, number, &i) == 0) {
         btsel(root, number, name, 30, &rsize);
         printf("%-30s%-15s\n", name, number);
@@ -137,13 +139,13 @@ void add(BTA *root) {
 
   char name[30], number[20];
 
-  printf("enter the name: ");
+  printf("enter the domain: ");
   scanf("%[^\n]", name); scanf("%*c");
 
-  printf("enter the domain: ");
+  printf("enter the ip: ");
   scanf("%[^\n]", number); scanf("%*c");
 
-  printf("%s-%s-%d\n",name, number, btins(root, number, name, 30* sizeof(char)));
+  btins(root, number, name, 30* sizeof(char));
   writeFile(name, number);
-  printf("add successfull!\n");
+  printf("add successfull!\n\n");
 }
