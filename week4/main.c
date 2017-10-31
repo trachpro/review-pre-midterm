@@ -1,4 +1,5 @@
 #include "main.h"
+int input;
 
 void readFile(BTA *root) {
     FILE *f = fopen("dns.txt", "r");
@@ -8,7 +9,7 @@ void readFile(BTA *root) {
     int n;
 
     fscanf(f,"%d",&n);fscanf(f,"%*c");
-
+    input = n;
     for(int i = 0; i< n; i++) {
 
       fscanf(f,"%[^\n]", name); fscanf(f,"%*c");
@@ -33,10 +34,16 @@ void writeFile(char *name, char* number) {
         printf("cannot read file!\n");
         return;
     };
-
+    
     fprintf(f,"%s\n%s\n",name,number);
-
+    
     fclose(f);
+
+    FILE *f2 = fopen("dns.txt","r+");
+    
+    fprintf(f2,"%d",++input);
+    
+    fclose(f2);
 }
 
 void insert(BTA *root) {
@@ -137,15 +144,32 @@ void print(BTA *root)
 
 void add(BTA *root) {
 
-  char name[30], number[20];
-
+  char name[30], number[20], name1[30], number1[20];
+  int s, rsize,i;
   printf("enter the domain: ");
   scanf("%[^\n]", name); scanf("%*c");
 
   printf("enter the ip: ");
   scanf("%[^\n]", number); scanf("%*c");
+  
+  btpos(root,ZSTART);
+  while(bnxtky(root,number1,&i) == 0) {
+    
+    btsel(root, number1, name1, 30, &rsize);
+    if(!strcmp(name,name1) || !strcmp(number,number1)) {
+      printf("exist domain or ip!\n");
+      s = 1;
+    }
+  }
+  
+  if(s == 0) s = btins(root, number, name, 30* sizeof(char));
+  
+  if(!s) {
 
-  btins(root, number, name, 30* sizeof(char));
-  writeFile(name, number);
-  printf("add successfull!\n\n");
+    writeFile(name, number);
+    printf("add successfull!\n\n");
+  } else {
+
+    printf("add fail!\n\n");
+  }
 }
