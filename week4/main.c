@@ -6,16 +6,34 @@ void readFile(BTA *root) {
     if(f == NULL) return;
 
     char name[30], number[20];
-    int n;
 
-    fscanf(f,"%d",&n);fscanf(f,"%*c");
+    char c;
+    fscanf(f,"%c",&c);fscanf(f,"%*c");
+    int n;
+    
+    if(c>='a' && c<='w') {
+
+      printf("format of file is wrong! fail to read file!\n");
+      return;
+    }
+
+    n = (int)c - 48;
+
+    
     input = n;
+   
     for(int i = 0; i< n; i++) {
 
       fscanf(f,"%[^\n]", name); fscanf(f,"%*c");
       fscanf(f,"%[^\n]", number); fscanf(f,"%*c");
 
-      btins(root, number, name, 30* sizeof(char));
+      int s = btins(root, number, name, 30* sizeof(char));
+      
+      if(s != 0) {
+
+	printf("add fail: %s: %s\n", name,number);
+	return;
+      }
     }
     /* while(!feof(f)) { */
     /*     fscanf(f,"%[^:]", name); fscanf(f,"%*c"); */
