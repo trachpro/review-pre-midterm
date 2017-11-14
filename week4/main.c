@@ -1,9 +1,9 @@
 #include "main.h"
 int input;
 
-void readFile(BTA *root) {
+int readFile(BTA *root) {
     FILE *f = fopen("dns.txt", "r");
-    if(f == NULL) return;
+    if(f == NULL) return 0;
 
     char name[30], number[20];
 
@@ -14,7 +14,7 @@ void readFile(BTA *root) {
     if(c>='a' && c<='w') {
 
       printf("format of file is wrong! fail to read file!\n");
-      return;
+      return 0;
     }
 
     n = (int)c - 48;
@@ -32,7 +32,7 @@ void readFile(BTA *root) {
       if(s != 0) {
 
 	printf("add fail: %s: %s\n", name,number);
-	return;
+	return 0;
       }
     }
     /* while(!feof(f)) { */
@@ -43,6 +43,8 @@ void readFile(BTA *root) {
     /* } */
 
     fclose(f);
+
+    return 1;
 }
 
 void writeFile(char *name, char* number) {

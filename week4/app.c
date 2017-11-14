@@ -12,7 +12,8 @@ int main()
       
       switch(ls) {
 
-      case 1: readFile(abc); print(abc); break;
+      case 1: if(readFile(abc)) print(abc);
+	else return 0; break;
       case 2: add(abc); break;
       case 3: searchByName(abc); break;
       case 4: searchByNumber(abc); break;

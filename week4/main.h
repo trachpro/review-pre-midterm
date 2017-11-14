@@ -4,7 +4,7 @@
 #include "../lib/bt/inc/btree.h"
 #include "../lib/libfdr/jrb.h"
 
-void readFile(BTA *root);
+int readFile(BTA *root);
 void writeFile(char *name, char* number);
 void insert(BTA *root);
 void searchByName(BTA *root);
