@@ -191,6 +191,7 @@ int getArr(JRB output,int end, OutType arr[]) {
         arr[n++] = *x;
         node = jrb_find_int(output, x->id);
         printf("----------nodeout->key: %d-%d-%d\n\n", x->id,x->idBus, x->sum);
+        // printf("----------nodeout->key: %d-%d-%d\n\n", arr[n].id,arr[n].idBus, arr[n].sum); //nếu thay bằng dòng này thì nó sẽ in ra giá trị rác, tôi éo hiểu luôn
         x = jval_v(node->val);
     }
 
