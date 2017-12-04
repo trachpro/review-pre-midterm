@@ -1,0 +1,6 @@
+{
+    "files.associations": {
+        "dllist.h": "c"
+    },
+    "C_Cpp.intelliSenseEngineFallback": "Disabled"
+}
