@@ -32,3 +32,12 @@ void readFile(Graph graph);
 void dropGraph(Graph graph);
 void addValue(Graph graph);
 void findPath(Graph graph, char* name1, char* name2);
+
+// ý tưởng
+//tạo 1 cây JRB vertices để lưu tên, 1 cái JRB edge để lưu cạnh, 
+//trong JRB edge có key là id của từng busstop và 
+// // val là 1 JRB con với id là idBus (sô xe bus) và val là 1 cấu trúc 
+// Weight {
+//     id: lưu id của điểm tiếp theo
+//     length: khoảng cách từ điểm này tới id tiếp đó
+// }
