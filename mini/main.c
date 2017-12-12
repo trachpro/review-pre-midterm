@@ -174,10 +174,10 @@ void findPath(Graph graph, char* name1, char* name2) {
     // }
     OutType arr[100];
     int nx = getArr(output, key2, arr);
-    // print(key2,nx,arr);
+    print(key2,nx,arr);
 }
 
-int getArr(JRB output,int end, OutType arr[]) {
+int getArr(JRB output,int end, OutType *arr) {
 
     int n = 0;
     JRB node = jrb_find_int(output, end);
@@ -190,8 +190,8 @@ int getArr(JRB output,int end, OutType arr[]) {
 
         arr[n++] = *x;
         node = jrb_find_int(output, x->id);
-        printf("----------nodeout->key: %d-%d-%d\n\n", x->id,x->idBus, x->sum);
-        // printf("----------nodeout->key: %d-%d-%d\n\n", arr[n].id,arr[n].idBus, arr[n].sum); //nếu thay bằng dòng này thì nó sẽ in ra giá trị rác, tôi éo hiểu luôn
+        // printf("----------nodeout->key: %d-%d-%d\n\n", x->id,x->idBus, x->sum);
+        // printf("----------nodeout->key: %d-%d-%d\n\n", arr[n-1].id,arr[n-1].idBus, arr[n-1].sum); //nếu thay bằng dòng này thì nó sẽ in ra giá trị rác, tôi éo hiểu luôn
         x = jval_v(node->val);
     }
 
@@ -201,7 +201,7 @@ int getArr(JRB output,int end, OutType arr[]) {
 void print(int end, int len, OutType arr[]) {
 
     printf("ok!---------------------%d\n",len);
-    for(int i = len - 1; i >= 0; i++) {
+    for(int i = len - 1; i > 0; i--) {
         // printf()
         if(i!=0) {
 
@@ -256,10 +256,10 @@ void dropGraph(Graph graph) {
 
     JRB node, subNode;
 
-    // jrb_traverse(node, graph.vertices) {
+    jrb_traverse(node, graph.vertices) {
 
-    //     free(jval_s(node->val));
-    // }
+        free(jval_s(node->val));
+    }
 
     jrb_free_tree(graph.vertices);
 
