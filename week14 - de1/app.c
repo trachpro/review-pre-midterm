@@ -56,6 +56,45 @@ void deDocTepDuLieu(Graph graph) {
     int tn = tongNut(graph);
 
     printf("tong cung la: %d\ntong nut la: %d\n", tc, tn);
+
+    // congVietNgayTruoc(graph, 6);
+    // tatCaCacViecTruoc(graph, 5);
+
+    // convert2(graph);
+    // BFS(graph, 1, 4);
+    int hasCircle = DAG(graph);
+
+    printf("hasCircle: %d\n", hasCircle);
+    int output[100];
+
+    int n = topologicalSort(graph, output);
+    printf("topo: ");
+    for(int i = 0; i < n; i++) {
+
+        printf("%-5d", output[i]);
+    }
+
+    printf("\n");
+}
+
+void mecung(Graph graph) {
+
+    readMeCung(graph);
+
+    JRB node;
+    jrb_traverse(node, graph.edges) {
+
+        JRB subTree = getJRBTree(node);
+        JRB subNode;
+        printf("%d: ", jval_i(node->key));
+        jrb_traverse(subNode, subTree) {
+
+            printf("%d ", jval_i(subNode->key));
+        }
+        printf("\n ");
+    }
+
+    listBB(graph);
 }
 
 int main() {
@@ -63,8 +102,8 @@ int main() {
     
     Graph graph = make_graph();
 
-    deDocTepDuLieu(graph);
 
+    mecung(graph);
     
     
     dropJRB(graph.edges);

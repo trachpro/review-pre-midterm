@@ -50,3 +50,13 @@ void readOrderHistory(Graph graph);
 void readTepDuLieu(Graph graph);
 int tongNut(Graph graph);
 int tongCung(Graph graph);
+void congVietNgayTruoc(Graph graph, int id);
+void tatCaCacViecTruoc(Graph, int id);
+void convert2(Graph graph);
+int  DFS(Graph graph, int start, int end); 
+int  BFS(Graph graph, int start, int end);
+int topologicalSort(Graph graph, int *output);
+int DAG(Graph graph);
+
+int readMeCung(Graph graph);
+void listBB(Graph graph);
