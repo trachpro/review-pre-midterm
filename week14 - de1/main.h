@@ -60,3 +60,5 @@ int DAG(Graph graph);
 
 int readMeCung(Graph graph);
 void listBB(Graph graph);
+void listLienThong(Graph graph);
+void listDao(Graph graph);

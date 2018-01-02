@@ -77,25 +77,7 @@ void deDocTepDuLieu(Graph graph) {
     printf("\n");
 }
 
-void mecung(Graph graph) {
 
-    readMeCung(graph);
-
-    JRB node;
-    jrb_traverse(node, graph.edges) {
-
-        JRB subTree = getJRBTree(node);
-        JRB subNode;
-        printf("%d: ", jval_i(node->key));
-        jrb_traverse(subNode, subTree) {
-
-            printf("%d ", jval_i(subNode->key));
-        }
-        printf("\n ");
-    }
-
-    listBB(graph);
-}
 
 void menu() {
   printf("\n-----MENU----");
@@ -110,14 +92,58 @@ void menu() {
   printf("\nyou choose: ");
 }
 
+int getPoint() {
+
+  int n;
+  printf("nhap diem: ");
+  scanf("%d", &n);
+  n+=11;
+
+  return n;
+}
+
+void mecung(Graph graph) {
+
+    int ls;
+    int tn, tc, point;
+
+    do {
+      menu();
+      scanf("%d", &ls);
+
+      switch(ls) {
+
+      case 1: readMeCung(graph); break;
+
+      case 2: tc = tongCung(graph); tn = tongNut(graph);
+	printf("tong nut la: %d\ntong cung la: %d\n", tn, tc/2);
+	break;
+
+      case 3: point = getPoint();
+	congVietNgayTruoc(graph, point);
+	break;
+
+      case 4: listLienThong(graph); break;
+
+      case 5: listDao(graph); break;
+
+      case 6: convert(graph, 11, 55); break;
+
+      case 7: printf("so cach di: %d\n", DFS(graph, 42, 43));
+
+      case 0: break;
+
+      default: printf("invalid input! enter again please!\n");
+      }
+    }while(ls!=0);
+}
+
 int main() {
 
     
     Graph graph = make_graph();
-
-
+    
     mecung(graph);
-    //menu();
     
     dropJRB(graph.edges);
     dropJRB(graph.vertices);

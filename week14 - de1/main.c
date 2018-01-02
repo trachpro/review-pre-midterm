@@ -370,8 +370,6 @@ void convert(Graph graph,int start,int end) {
 
     Dijkstra(graph, start, ow, op);
 
-    
-
     node = jrb_find_int(ow, end);
     if(jval_i(node->val) == INFINITY_VALUE) {
 
@@ -396,17 +394,26 @@ void convert(Graph graph,int start,int end) {
 
     int key = end;
 
+    Dllist stack = new_dllist();
+    Dllist listnode;
+
     while(1) {
 
+      dll_prepend(stack, new_jval_i(key));
         if(key == start) {
-            printf("%s\n", getVertexName(graph, key));
+	  //printf("%s\n", getVertexName(graph, key));
             break;
         }
         
-        printf("%s------>",getVertexName(graph, key));
-       
+        //printf("%s------>",getVertexName(graph, key));
+	
         node = jrb_find_int(op, key);
         key = jval_i(node->val);
+    }
+
+    dll_traverse(listnode, stack) {
+      key = jval_i(listnode->val);
+      listnode == dll_last(stack)? printf("%s",getVertexName(graph, key)): printf("%s->",getVertexName(graph, key));
     }
 
     dropJRB(ow);
@@ -643,8 +650,11 @@ void congVietNgayTruoc(Graph graph, int id) {
 
     int out[100];
 
-    int n = outCome(graph, id, out);
-    printf("cong viec ngay truoc: ");
+    int n = inCome(graph, id, out);
+    if(n == 0) {
+      printf("khong co nut lien ke cua %d\n", id);
+    }
+    printf("nut lien ke la: ");
     for(int i = 0; i< n; i++) {
 
         printf("%5d", out[i]);
@@ -818,8 +828,7 @@ int DFS(Graph graph, int start, int end) {
         
         
         if(u == end) {
-            printf("u = %d-", u);
-            break;
+            flag++;
         }
 
         node = jrb_find_int(visited, u);
@@ -829,7 +838,7 @@ int DFS(Graph graph, int start, int end) {
         } else {
             continue;
         }
-        printf("u = %-5d", u);
+       
         node = jrb_find_int(graph.edges, u);
 
         JRB tree = getJRBTree(node);
@@ -842,9 +851,6 @@ int DFS(Graph graph, int start, int end) {
 
                 dll_prepend(stack, new_jval_i(key));
             }
-
-           
-            if(key == start) flag = 1;
         }
 
     }
@@ -1113,4 +1119,60 @@ void listBB(Graph graph) {
         }
         printf("\n ");
     }
+}
+
+int maxLienThong(Graph graph) {
+  int max = 0;
+
+  JRB node;
+  int out[100];
+
+  jrb_traverse(node, graph.edges) {
+
+    int a = inCome(graph, jval_i(node->key), out);
+    if(a > max) {
+
+      max = a;
+    }
+  }
+
+  return max;
+}
+
+void listLienThong(Graph graph) {
+
+  int max = maxLienThong(graph);
+
+  int out[100];
+
+  JRB node;
+
+  printf("Cac nut co so lien thong lon nhat la: ");
+  jrb_traverse(node, graph.edges) {
+
+    if(max == inCome(graph, jval_i(node->key), out)) {
+
+      printf("%-5d", jval_i(node->key) - 11);
+    }
+  }
+
+  printf("\n");
+}
+
+void listDao(Graph graph) {
+
+  int out[100];
+
+  JRB node;
+
+  printf("Cac nut dao la: ");
+  jrb_traverse(node, graph.edges) {
+
+    if(inCome(graph, jval_i(node->key), out) == 0) {
+
+      printf("%-5d", jval_i(node->key) - 11);
+    }
+  }
+
+  printf("\n");
 }
