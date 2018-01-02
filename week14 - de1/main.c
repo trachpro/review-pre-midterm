@@ -1179,7 +1179,10 @@ int soCachDi(Graph graph, int start, int end,int * visited) {
 
     if(!node) return 0;
 
-    jrb_insert_int(visited, start, new_jval_i(1));
+    // jrb_insert_int(visited, start, new_jval_i(1));
+
+    printf("duyet: %d\n", start);
+    JRB tree = getJRBTree(node);
 
     visited[start] = 1;
 
@@ -1190,9 +1193,12 @@ int soCachDi(Graph graph, int start, int end,int * visited) {
 
         if(visited[key] == 0) {
 
-            if(key == end) return soCachDi(graph, key, end) + 1;
+            if(key == end){
+                printf("key == ed\n");
+                return 1;
+            }
 
-            else return soCachDi(graph, key, end);
+            else return soCachDi(graph, key, end, visited);
         }
 
         
