@@ -629,7 +629,6 @@ int tongCung(Graph graph) {
 
         JRB subNode;
         JRB subTree = getJRBTree(node);
-        printf("%d: ", jval_i(node->key));
         jrb_traverse(subNode, subTree) {
             i++;
         };
@@ -646,11 +645,12 @@ void congVietNgayTruoc(Graph graph, int id) {
     int n = inCome(graph, id, out);
     if(n == 0) {
       printf("khong co nut lien ke cua %d\n", id);
+      return;
     }
     printf("nut lien ke la: ");
     for(int i = 0; i< n; i++) {
-
-        printf("%5d", out[i]);
+        // printf("sdf = %d\n", out[i] - 10);
+        out[i] - 11 >= 10? printf("%d ", out[i] - 11): printf("0%d ", out[i] - 11);
     }
 
     printf("\n");
@@ -1144,8 +1144,9 @@ void listLienThong(Graph graph) {
   jrb_traverse(node, graph.edges) {
 
     if(max == inCome(graph, jval_i(node->key), out)) {
-
-      printf("%-5d", jval_i(node->key) - 11);
+    int key = jval_i(node->key) - 11;
+      
+      key >= 10? printf("%-5d", key): printf("0%d ", key);
     }
   }
 
@@ -1163,9 +1164,39 @@ void listDao(Graph graph) {
 
     if(inCome(graph, jval_i(node->key), out) == 0) {
 
-      printf("%-5d", jval_i(node->key) - 11);
+      int key = jval_i(node->key) - 11;
+      
+      key >= 10? printf("%-5d", key): printf("0%d ", key);
     }
   }
 
   printf("\n");
+}
+
+int soCachDi(Graph graph, int start, int end,int * visited) {
+
+    JRB node = jrb_find_int(graph.edges, start);
+
+    if(!node) return 0;
+
+    jrb_insert_int(visited, start, new_jval_i(1));
+
+    visited[start] = 1;
+
+    jrb_traverse(node, tree) {
+
+        
+        int key = jval_i(node->key);
+
+        if(visited[key] == 0) {
+
+            if(key == end) return soCachDi(graph, key, end) + 1;
+
+            else return soCachDi(graph, key, end);
+        }
+
+        
+    }
+
+    visited[start] = 0;
 }

@@ -62,3 +62,5 @@ int readMeCung(Graph graph);
 void listBB(Graph graph);
 void listLienThong(Graph graph);
 void listDao(Graph graph);
+int soCachDi(Graph graph, int start, int end, int *visited);
+void initU(int *u, int n);

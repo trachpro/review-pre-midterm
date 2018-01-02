@@ -81,13 +81,13 @@ void deDocTepDuLieu(Graph graph) {
 
 void menu() {
   printf("\n-----MENU----");
-  printf("\n1.");
-  printf("\n2.");
-  printf("\n3.");
-  printf("\n4.");
-  printf("\n5.");
-  printf("\n6.");
-  printf("\n7.");
+  printf("\n1.Doc file");
+  printf("\n2.In ra tong nut va tong cung");
+  printf("\n3.Tim nut lien thong");
+  printf("\n4.cac nut lien thong lon nhat");
+  printf("\n5.cac nut dao");
+  printf("\n6.Duong di ngan nhat");
+  printf("\n7.So cach di");
   printf("\n0.exit");
   printf("\nyou choose: ");
 }
@@ -157,7 +157,7 @@ void mecung(Graph graph) {
           diem2 = getPoint(graph);
           if (!diem2)
               break;
-          printf("so cach di: %d\n", DFS(graph, diem1, diem2));
+          printf("so cach di: %d\n", soCachDi(graph, diem1, diem2));
           break;
 
       case 0: break;
