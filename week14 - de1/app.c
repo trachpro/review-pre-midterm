@@ -92,6 +92,8 @@ void menu() {
   printf("\nyou choose: ");
 }
 
+int xy = 0;
+
 int check(Graph graph,int point) {
 
     JRB node;
@@ -160,7 +162,8 @@ void mecung(Graph graph) {
           if (!diem2)
               break;
 	        initU(out, 100);
-          printf("so cach di: %d\n", soCachDi(graph, diem1, diem2, out));
+		soCachDi(graph, diem1, diem2, out);
+          printf("so cach di: %d\n", xy);
           break;
 
       case 0: break;
