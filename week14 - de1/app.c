@@ -92,20 +92,33 @@ void menu() {
   printf("\nyou choose: ");
 }
 
-int getPoint() {
+int check(Graph graph,int point) {
+
+    JRB node;
+    jrb_traverse(node, graph.edges) {
+
+        if(point == jval_i(node->key)) return point;
+    }
+    
+    printf("diem khong ton tai hoac khong phai la cua!\n");
+    return 0;
+}
+
+int getPoint(Graph graph) {
 
   int n;
   printf("nhap diem: ");
   scanf("%d", &n);
   n+=11;
 
-  return n;
+  return check(graph,n);
 }
 
 void mecung(Graph graph) {
 
     int ls;
     int tn, tc, point;
+    int diem1, diem2;
 
     do {
       menu();
@@ -119,7 +132,7 @@ void mecung(Graph graph) {
 	printf("tong nut la: %d\ntong cung la: %d\n", tn, tc/2);
 	break;
 
-      case 3: point = getPoint();
+      case 3: point = getPoint(graph);
 	congVietNgayTruoc(graph, point);
 	break;
 
@@ -127,9 +140,25 @@ void mecung(Graph graph) {
 
       case 5: listDao(graph); break;
 
-      case 6: convert(graph, 11, 55); break;
+      case 6: {
+          diem1 = getPoint(graph);
+          if(!diem1) break;
+          
+          diem2 = getPoint(graph);
+          if(!diem2) break;
+          convert(graph, diem1, diem2); break;
+      }
 
-      case 7: printf("so cach di: %d\n", DFS(graph, 42, 43));
+      case 7:
+          diem1 = getPoint(graph);
+          if (!diem1)
+              break;
+
+          diem2 = getPoint(graph);
+          if (!diem2)
+              break;
+          printf("so cach di: %d\n", DFS(graph, diem1, diem2));
+          break;
 
       case 0: break;
 

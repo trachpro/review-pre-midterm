@@ -377,13 +377,6 @@ void convert(Graph graph,int start,int end) {
         return;
     }
 
-    jrb_traverse(node, op) {
-
-        printf("op:%d- %d\n",jval_i(node->key) ,jval_i(node->val));
-    }
-
-
-
     node = jrb_find_int(op, end);
 
     
