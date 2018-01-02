@@ -644,7 +644,7 @@ void congVietNgayTruoc(Graph graph, int id) {
 
     int n = inCome(graph, id, out);
     if(n == 0) {
-      printf("khong co nut lien ke cua %d\n", id);
+      printf("khong co nut lien ke cua nut nay\n");
       return;
     }
     printf("nut lien ke la: ");
