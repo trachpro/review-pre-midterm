@@ -97,6 +97,19 @@ void mecung(Graph graph) {
     listBB(graph);
 }
 
+void menu() {
+  printf("\n-----MENU----");
+  printf("\n1.");
+  printf("\n2.");
+  printf("\n3.");
+  printf("\n4.");
+  printf("\n5.");
+  printf("\n6.");
+  printf("\n7.");
+  printf("\n0.exit");
+  printf("\nyou choose: ");
+}
+
 int main() {
 
     
@@ -104,7 +117,7 @@ int main() {
 
 
     mecung(graph);
-    
+    //menu();
     
     dropJRB(graph.edges);
     dropJRB(graph.vertices);

@@ -1014,7 +1014,7 @@ int readMeCung(Graph graph) {
     char a[80];
     int h = 1;
     char str[3];
-
+    fscanf(f,"%[^\n]",a); fscanf(f,"%*c");
     while(!feof(f)) {
         int t = 1;
         fscanf(f,"%[^\n]",a); fscanf(f,"%*c");
