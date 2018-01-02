@@ -405,9 +405,17 @@ void convert(Graph graph,int start,int end) {
     }
 
     dll_traverse(listnode, stack) {
-      key = jval_i(listnode->val);
-      listnode == dll_last(stack)? printf("%s",getVertexName(graph, key)): printf("%s->",getVertexName(graph, key));
+        if(listnode == dll_last(stack)) break;
+      key = jval_i(listnode->val) - 11;
+      
+      key >= 10? printf("%d->", key): printf("0%d->", key);
+      if(listnode == dll_last(stack)) break;
+    //   listnode == dll_last(stack)? printf("%s",getVertexName(graph, key)): printf("%s->",getVertexName(graph, key));
     }
+
+    key = jval_i(listnode->val) - 11;
+      
+      key >= 10? printf("%d", key): printf("0%d", key);
 
     dropJRB(ow);
     dropJRB(op);
@@ -1173,13 +1181,18 @@ void listDao(Graph graph) {
   printf("\n");
 }
 
+int xy = 0;
+
 int soCachDi(Graph graph, int start, int end,int * visited) {
 
+    int flag = 0;
     JRB node = jrb_find_int(graph.edges, start);
 
-    if(!node) return 0;
-
-    // jrb_insert_int(visited, start, new_jval_i(1));
+    // if(start == end) {
+        
+    //     xy ++;
+    //     return 0;
+    // };
 
     printf("duyet: %d\n", start);
     JRB tree = getJRBTree(node);
@@ -1193,16 +1206,20 @@ int soCachDi(Graph graph, int start, int end,int * visited) {
 
         if(visited[key] == 0) {
 
+            flag = 1;
             if(key == end){
-                printf("key == ed\n");
+                printf("key == %d\n", key);
+                xy++;
                 return 1;
             }
 
-            else return soCachDi(graph, key, end, visited);
+            soCachDi(graph, key, end, visited);
         }
-
-        
     }
 
     visited[start] = 0;
+
+    if(!flag) return 0;
+
+    // return 0;
 }
