@@ -111,6 +111,8 @@ int getPoint(Graph graph) {
   scanf("%d", &n);
   n+=11;
 
+  int out[100];
+
   return check(graph,n);
 }
 
@@ -157,7 +159,8 @@ void mecung(Graph graph) {
           diem2 = getPoint(graph);
           if (!diem2)
               break;
-          printf("so cach di: %d\n", soCachDi(graph, diem1, diem2));
+	  initU(out, 100);
+          printf("so cach di: %d\n", soCachDi(graph, diem1, diem2, out));
           break;
 
       case 0: break;
